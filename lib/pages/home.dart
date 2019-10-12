@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../components/app_bar_raw.dart';
+import '../components/category_card.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -9,13 +10,20 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Init'),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: Center(
-        child: Text('Hello'),
-      ),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            AppBarRaw(),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                  [
+                    CategoryCard()
+
+                  ]
+              ),
+            ),
+          ],
+
+        )
     );
   }
 }
