@@ -10,6 +10,7 @@ class CategoryCardBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
       children: <Widget>[
         Container(
@@ -27,9 +28,9 @@ class CategoryCardBox extends StatelessWidget {
         ),
         Container(
             child: Text(
-          label,
-          textAlign: TextAlign.center,
-        ))
+              label,
+              textAlign: TextAlign.center,
+            ))
       ],
     );
   }

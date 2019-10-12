@@ -4,7 +4,6 @@ class AppBarRaw extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      floating: true,
       pinned: true,
       expandedHeight: 140,
       shape: RoundedRectangleBorder(

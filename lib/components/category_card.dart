@@ -9,12 +9,12 @@ class CategoryCard extends StatelessWidget {
       child: Container(
         child: ListTile(
             title: Text(
-              'kategori',
+              'Kategori',
               style: TextStyle(color: Color(0xff7C7474)),
             ),
             subtitle: GridView.count(
+              physics: NeverScrollableScrollPhysics(),
               childAspectRatio: 1.1,
-              scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: EdgeInsets.all(0),
               crossAxisCount: 2,

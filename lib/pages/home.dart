@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/app_bar_raw.dart';
 import '../components/category_card.dart';
+import '../components/berita_terkini_card.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -16,8 +17,8 @@ class _HomeState extends State<Home> {
             SliverList(
               delegate: SliverChildListDelegate(
                   [
-                    CategoryCard()
-
+                    CategoryCard(),
+                    BeritaTerkiniCard()
                   ]
               ),
             ),
