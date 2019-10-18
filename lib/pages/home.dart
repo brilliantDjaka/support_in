@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/app_bar_raw.dart';
+import '../components/app_bar_home.dart';
 import '../components/category_card.dart';
 import '../components/berita_terkini_card.dart';
 class Home extends StatefulWidget {
@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
         body: CustomScrollView(
           slivers: <Widget>[
-            AppBarRaw(),
+            AppBarHome(),
             SliverList(
               delegate: SliverChildListDelegate(
                   [

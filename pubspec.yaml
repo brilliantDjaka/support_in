@@ -45,6 +45,9 @@ flutter:
     - lib/assets/content_creator.png
     - lib/assets/open_source_dev.png
     - lib/assets/seniman.png
+    - lib/assets/logo.png
+    - lib/assets/google.png
+    - lib/assets/avatar.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

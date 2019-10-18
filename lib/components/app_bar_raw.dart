@@ -1,48 +1,27 @@
 import 'package:flutter/material.dart';
 
 class AppBarRaw extends StatelessWidget {
-  @override
+  List<Widget> action;
+  Widget leading;
+  FlexibleSpaceBar flexibleSpaceBar;
+  PreferredSizeWidget preferredSizeWidget;
+
+  AppBarRaw(
+      {this.action, this.flexibleSpaceBar, this.preferredSizeWidget, this.leading});
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
+      leading: leading,
       expandedHeight: 140,
+      automaticallyImplyLeading: true,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.elliptical(33, 10),
               bottomRight: Radius.elliptical(33, 10))),
       backgroundColor: Theme.of(context).primaryColor,
-      actions: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-          child: Icon(
-            Icons.group,
-            size: 30,
-            color: Theme.of(context).accentColor,
-          ),
-        ),
-        Expanded(
-          child: Container(),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: IconButton(
-            icon: Icon(Icons.format_align_right),
-            onPressed: () => print('Pressed'),
-          ),
-        )
-      ],
-      flexibleSpace: FlexibleSpaceBar(
-        title: ListView(
-          children: <Widget>[
-            Container(
-              height: 90,
-            ),
-            Text('Hello,', style: Theme.of(context).textTheme.title),
-            Text('Brian Rofiq', style: Theme.of(context).textTheme.title)
-          ],
-        ),
-        titlePadding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-      ),
+      actions: action,
+      flexibleSpace: flexibleSpaceBar,
+      bottom: preferredSizeWidget,
     );
   }
 }
