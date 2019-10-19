@@ -10,7 +10,7 @@ class DaftarKontenCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Kategori',
+            'Karya',
             style: Theme.of(context).textTheme.caption.copyWith(fontSize: 17),
           ),
           DaftarKontenCardChild(
@@ -48,6 +48,9 @@ class DaftarKontenCard extends StatelessWidget {
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam blandit tortor sit amet vehicula sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut imperdie',
             rating: 9.1231,
+          ),
+          Container(
+            height: 60,
           )
         ],
       ),

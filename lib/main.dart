@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:support_in/pages/daftar_support.dart';
+import 'package:support_in/pages/tukar_point.dart';
 import './pages/home.dart';
 import './pages/login.dart';
 import './pages/daftar_kreator.dart';
@@ -31,6 +32,7 @@ void main() {
       '/daftar-karya': (context) => DaftarKarya(),
       '/deskripsi-karya': (context) => DeskripsiKarya(),
       '/daftar-support': (context) => DaftarSupport(),
+      '/tukar-point': (context) => TukarPoint(),
     },
   ));
 }

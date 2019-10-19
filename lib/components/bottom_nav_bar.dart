@@ -21,7 +21,7 @@ class BottomNavBar extends StatelessWidget {
           Navigator.pushNamedAndRemoveUntil(
               context, '/', (Route<dynamic> route) => false);
         else
-          Navigator.of(context).pop();
+          Navigator.of(context).pushNamed('/tukar-point');
       },
     );
   }

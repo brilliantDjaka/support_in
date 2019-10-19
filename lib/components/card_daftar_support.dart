@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class CardDaftarSupport extends StatelessWidget {
   String judulCardSupport;
@@ -57,7 +58,46 @@ class CardDaftarSupport extends StatelessWidget {
                           .copyWith(fontSize: 12),
                     )),
                     FlatButton(
-                      onPressed: () => print('Oyi'),
+                      onPressed: () =>
+                          Alert(
+                              title: 'Support $judulCardSupport',
+                              style: AlertStyle(
+                                isCloseButton: false,
+                                titleStyle: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .caption
+                                    .copyWith(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              content: Text(
+                                'Apakah Anda yakin memilih opsi ini?',
+                                style:
+                                Theme
+                                    .of(context)
+                                    .textTheme
+                                    .caption
+                                    .copyWith(),
+                              ),
+                              context: context,
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    'Tidak Yakin',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  color: Colors.redAccent,
+                                ),
+                                DialogButton(
+                                  child: Text(
+                                    'Yakin',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  color: Color(0xff7BE172),
+                                  onPressed: () => print('Yakin'),
+                                ),
+                              ]).show(),
                       child: Text(
                         'Support',
                         style: TextStyle(color: Colors.white),
