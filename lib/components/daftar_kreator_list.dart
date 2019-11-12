@@ -4,21 +4,30 @@ class DaftarKreatorList extends StatelessWidget {
   String nama;
   int jumlahKarya;
   double skor;
+  String urlImage;
+  String idKreator;
 
   DaftarKreatorList(
-      {@required this.nama, @required this.jumlahKarya, @required this.skor});
+      {@required this.nama, @required this.jumlahKarya, @required this.skor,
+        @required this.urlImage, @required this.idKreator
+
+      });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/daftar-karya');
+        Navigator.pushNamed(context, '/daftar-karya', arguments: {
+          "idKreator": idKreator
+        });
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: Row(
           children: <Widget>[
-            Image.asset('lib/assets/avatar.png', height: 70, width: 70),
+            urlImage == null || urlImage.isEmpty ? Image.asset(
+                'lib/assets/avatar.png', height: 70, width: 70) : Image.network(
+              urlImage, height: 70, width: 70, semanticLabel: 'loading',),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
@@ -74,10 +83,7 @@ class DaftarKreatorList extends StatelessWidget {
                       )
                     ],
                   ),
-                  decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(width: 2, color: Color(0xff7C7474))),
-                  ),
+
                 ),
               ),
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 class CategoryCardBox extends StatelessWidget {
   String imageUrl;
   String label;
@@ -11,7 +10,9 @@ class CategoryCardBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/daftar-kreator');
+        Navigator.of(context).pushNamed('/daftar-kreator', arguments: {
+          "kategori": label
+        });
       },
       child: ListView(
         physics: NeverScrollableScrollPhysics(),

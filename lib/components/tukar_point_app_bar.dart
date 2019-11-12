@@ -1,7 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:support_in/components/app_bar_raw.dart';
 
 class TukarPointAppBar extends StatelessWidget {
+  int point;
+
+  TukarPointAppBar({
+    @required this.point
+  });
+
   @override
   Widget build(BuildContext context) {
     return AppBarRaw(
@@ -24,7 +31,7 @@ class TukarPointAppBar extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 10, right: 40, bottom: 5),
+                    const EdgeInsets.only(left: 10, right: 40, bottom: 5),
                     child: Text(
                       'Tukar Pointmu',
                       style: TextStyle(
@@ -39,7 +46,7 @@ class TukarPointAppBar extends StatelessWidget {
                         shape: BoxShape.rectangle,
                         color: Colors.black12,
                         borderRadius: BorderRadius.circular(10)),
-                    child: Text('100pts',
+                    child: Text('$point pts',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,
@@ -48,27 +55,27 @@ class TukarPointAppBar extends StatelessWidget {
                 ],
               ),
               Container(
-                child: TextField(
-                  expands: false,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: 'Search...',
-                      hasFloatingPlaceholder: false,
-                      labelStyle: TextStyle(
-                          color: Color(0xff7C7474),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w100),
-                      icon: Icon(Icons.search)),
-                  style: TextStyle(
-                      color: Color(0xff7C7474), fontWeight: FontWeight.w100),
-                ),
-                height: 27,
-                padding: EdgeInsets.only(left: 4),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(30)),
+                  child: TextField(
+                    expands: false,
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        labelText: 'Cari hadiah kamu',
+                        hasFloatingPlaceholder: false,
+                        labelStyle: TextStyle(
+                            color: Color(0xff7C7474),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w100),
+                        icon: Icon(Icons.search)),
+                    style: TextStyle(
+                        color: Color(0xff7C7474), fontWeight: FontWeight.w100),
+                  ),
+                  height: 27,
+                  padding: EdgeInsets.only(left: 4),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(30))
               )
             ],
           ),

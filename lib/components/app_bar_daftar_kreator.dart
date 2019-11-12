@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import './app_bar_raw.dart';
 
 class AppBarDaftarKreator extends StatelessWidget {
+  String kategori;
+
+  AppBarDaftarKreator(this.kategori);
+
   @override
   Widget build(BuildContext context) {
     return AppBarRaw(
@@ -20,7 +24,7 @@ class AppBarDaftarKreator extends StatelessWidget {
           child: ListTile(
               contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               title: Text(
-                'Penulis',
+                '$kategori',
                 style: TextStyle(color: Colors.white),
               ),
               subtitle: Container(

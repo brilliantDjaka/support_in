@@ -8,7 +8,7 @@ class ButtonSupport extends StatelessWidget {
       child: FlatButton(
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
-        onPressed: () {
+        onPressed: () async {
           Navigator.of(context).pushNamed('/daftar-support');
         },
         child: Text(

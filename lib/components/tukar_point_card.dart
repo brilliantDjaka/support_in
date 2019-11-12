@@ -2,13 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class TukarPointCard extends StatelessWidget {
+class TukarPointCard extends StatefulWidget {
   String judul;
   String deskripsi;
   int point;
+  String urlImage;
+  Function callbackPoint;
 
   TukarPointCard(
-      {@required this.judul, @required this.deskripsi, @required this.point});
+      {@required this.judul, @required this.deskripsi, @required this.point, @required this.urlImage,
+        @required this.callbackPoint
+      });
+
+  @override
+  _TukarPointCardState createState() => _TukarPointCardState();
+}
+
+class _TukarPointCardState extends State<TukarPointCard> {
+  bool pressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +36,16 @@ class TukarPointCard extends StatelessWidget {
                 height: 100,
                 width: 90,
                 decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(widget.urlImage),
+                        fit: BoxFit.cover
+                    ),
                     color: Color(0xffC4C4C4),
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10)),
               ),
               Text(
-                '${point.toString()}Point',
+                '${widget.point.toString()}Point',
                 style: Theme.of(context).textTheme.caption,
               )
             ],
@@ -41,13 +56,13 @@ class TukarPointCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  judul,
+                  widget.judul,
                   style: Theme.of(context).textTheme.caption.copyWith(
                         fontSize: 15,
                       ),
                 ),
                 Text(
-                  deskripsi,
+                  widget.deskripsi,
                   style: Theme.of(context)
                       .textTheme
                       .caption
@@ -57,11 +72,11 @@ class TukarPointCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 5),
                   child: FlatButton(
                     child: Text(
-                      'Tukarkan',
+                      pressed ? 'Buka Reward' : 'Tukarkan',
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () => Alert(
-                        title: judul,
+                        title: widget.judul,
                         style: AlertStyle(
                           isCloseButton: false,
                           titleStyle: Theme.of(context)
@@ -90,7 +105,13 @@ class TukarPointCard extends StatelessWidget {
                               style: TextStyle(color: Colors.white),
                             ),
                             color: Color(0xff7BE172),
-                            onPressed: () => print('Yakin'),
+                            onPressed: () {
+                              setState(() {
+                                pressed = true;
+                                widget.callbackPoint(-100);
+                              });
+                              Navigator.pop(context);
+                            },
                           ),
                         ]).show(),
                     color: Theme.of(context).primaryColor,

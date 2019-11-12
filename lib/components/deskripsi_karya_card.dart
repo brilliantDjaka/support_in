@@ -5,6 +5,11 @@ class DeskripsiKaryaCard extends StatelessWidget {
   String title;
   String description;
 
+  DeskripsiKaryaCard({
+    @required this.imageUrl,
+    @required this.title,
+    @required this.description
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +21,7 @@ class DeskripsiKaryaCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Text(
-                  'Work Hard Pray Hard',
+                  title,
                   style: Theme.of(context)
                       .textTheme
                       .caption
@@ -32,7 +37,7 @@ class DeskripsiKaryaCard extends StatelessWidget {
                 color: Theme.of(context).accentColor,
               ),
               Text(
-                '4.5',
+                '9.5',
                 style:
                     Theme.of(context).textTheme.caption.copyWith(fontSize: 18),
               )
@@ -47,7 +52,8 @@ class DeskripsiKaryaCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: imageUrl == null || imageUrl.isEmpty
                         ? null
-                        : DecorationImage(image: NetworkImage(imageUrl)),
+                        : DecorationImage(
+                        image: NetworkImage(imageUrl), fit: BoxFit.cover),
                     color: Color(0xffC4C4C4),
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.circular(10)),
@@ -56,7 +62,7 @@ class DeskripsiKaryaCard extends StatelessWidget {
                   child: Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam blandit tortor sit amet vehicula sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut imperdiet',
+                  description,
                   style: Theme.of(context)
                       .textTheme
                       .caption
@@ -70,7 +76,7 @@ class DeskripsiKaryaCard extends StatelessWidget {
               top: 10,
             ),
             child: Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam blandit tortor sit amet vehicula sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut imperdiet \n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam blandit tortor sit amet vehicula sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut imperdiet',
+              'Novel Boy Candra ini bercerita tentang cinta, persahabatan dan dibumbui dengan sedikit pengkhianatan ala anak remaja. Bahasa yang digunakan dalam buku ini juga cukup ringan, sehingga pembaca tidak perlu bersusah payah untuk mengikuti alur cerita buku ini. Buku-buku seperti ini banyak disukai oleh remaja-remaja, karena kisahnya yang sering kali serupa dengan kehidupan nyata yang mereka alami. Nampaknya Boy Candra memang mengerti banyak tentang dunia remaja sehingga bisa menghayatinya dengan baik.',
               style: Theme.of(context).textTheme.caption.copyWith(fontSize: 14),
             ),
           )

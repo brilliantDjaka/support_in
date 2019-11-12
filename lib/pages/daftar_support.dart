@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:support_in/components/bottom_nav_bar.dart';
 import 'package:support_in/components/card_daftar_support.dart';
 import 'package:support_in/components/daftar_karya_app_bar.dart';
+import 'package:support_in/helper/async_func.dart';
 class DaftarSupport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Map args = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
+    Future kreatorData = getKaryaListByKreatorId(args['idKreator']);
+    if (args == null) args = {};
     return Scaffold(
       bottomNavigationBar: BottomNavBar(),
       body: CustomScrollView(
         slivers: <Widget>[
-          DaftarKaryaAppBar(),
+          DaftarKaryaAppBar(
+            kreatorData: kreatorData,
+          ),
           SliverList(
             delegate: SliverChildListDelegate([
               CardDaftarSupport(

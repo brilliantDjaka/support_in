@@ -86,17 +86,37 @@ class CardDaftarSupport extends StatelessWidget {
                                     'Tidak Yakin',
                                     style: TextStyle(color: Colors.white),
                                   ),
-                                  onPressed: () => Navigator.of(context).pop(),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
                                   color: Colors.redAccent,
                                 ),
                                 DialogButton(
-                                  child: Text(
-                                    'Yakin',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  color: Color(0xff7BE172),
-                                  onPressed: () => print('Yakin'),
-                                ),
+                                    child: Text(
+                                      'Yakin',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    color: Color(0xff7BE172),
+                                    onPressed: () {
+                                      Alert(
+                                          title: 'Selamat Point Kamu Bertambah 100',
+                                          context: context,
+                                          type: AlertType.success,
+                                          buttons: [
+                                            DialogButton(
+                                                child: Text(
+                                                  'ok',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                color: Color(0xff7BE172),
+                                                onPressed: () =>
+                                                    Navigator.of(context)
+                                                        .popUntil(
+                                                        ModalRoute.withName(
+                                                            '/daftar-karya')))
+                                          ]).show();
+                                    }),
                               ]).show(),
                       child: Text(
                         'Support',

@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
 class DaftarKontenCardChild extends StatelessWidget {
+  String idKreator;
   String imageUrl;
   double rating;
   String title;
   String description;
 
-  DaftarKontenCardChild(
-      {this.imageUrl,
-      @required this.title,
-      @required this.description,
-      @required this.rating});
+  DaftarKontenCardChild({
+    @required this.idKreator,
+    this.imageUrl,
+    @required this.title,
+    @required this.description,
+    @required this.rating});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
-            .pushNamed('/deskripsi-karya', arguments: {"test": 'test'});
+            .pushNamed('/deskripsi-karya', arguments: {"idKreator": idKreator});
       },
       child: Container(
         padding: EdgeInsets.only(top: 10, right: 10, bottom: 10),
@@ -32,7 +34,8 @@ class DaftarKontenCardChild extends StatelessWidget {
                   decoration: BoxDecoration(
                       image: imageUrl == null || imageUrl.isEmpty
                           ? null
-                          : DecorationImage(image: NetworkImage(imageUrl)),
+                          : DecorationImage(
+                          image: NetworkImage(imageUrl), fit: BoxFit.cover),
                       color: Color(0xffC4C4C4),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(10)),
