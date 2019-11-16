@@ -14,9 +14,41 @@ class UnLogin extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Padding(
+                padding: const EdgeInsets.only(top: 42),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        'lib/assets/support.png',
+                        height: 42,
+                        width: 42,
+                        alignment: Alignment.topLeft,
+                      ),
+                    ),
+                    Text(
+                      'Support.in',
+                      style: TextStyle(
+                          color: Theme
+                              .of(context)
+                              .primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          fontFamily: 'Nunito Sans'),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Container(
-                  color: Colors.black12,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: ExactAssetImage('lib/assets/ilus2.png'))),
                   height: 280,
                   width: 296,
                 ),
@@ -68,9 +100,6 @@ class UnLogin extends StatelessWidget {
                 tag: 'register',
                 child: FlatButton(
                   padding: EdgeInsets.only(top: 12, bottom: 12),
-                  shape: new RoundedRectangleBorder(
-                      side: BorderSide(color: Theme.of(context).primaryColor),
-                      borderRadius: new BorderRadius.circular(4)),
                   onPressed: () => Navigator.of(context).pushNamed('/register'),
                   child: Text(
                     'Register',

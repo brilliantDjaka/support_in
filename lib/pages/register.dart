@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:support_in/components/register_form.dart';
+import 'package:support_in/helper/async_func.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -22,7 +23,55 @@ class _RegisterState extends State<Register> {
   }
 
   Widget build(BuildContext context) {
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldKey,
+      floatingActionButton: Hero(
+        tag: 'register',
+        child: Container(
+          width: MediaQuery
+              .of(context)
+              .size
+              .width - 32,
+          child: FlatButton(
+            padding: EdgeInsets.only(top: 12, bottom: 12),
+            onPressed: () async {
+              var success = await register(
+                name: _fullName.text,
+                email: _email.text,
+                password: _password.text,
+              );
+              if (success) {
+                _scaffoldKey.currentState.showSnackBar(SnackBar(
+                  content: Text('Success register'),
+                ));
+                await Future.delayed(Duration(
+                    seconds: 1
+                ));
+                Navigator.pop(context);
+              }
+              else {
+                _scaffoldKey.currentState.showSnackBar(SnackBar(
+                  content: Text('Failed register'),
+                ));
+              }
+            },
+            shape: new RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme
+                        .of(context)
+                        .primaryColor),
+                borderRadius: new BorderRadius.circular(4)),
+            child: Text(
+              'Register',
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Theme
+                .of(context)
+                .primaryColor,
+          ),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(24, 48, 24, 27),
         child: ListView(
@@ -50,27 +99,7 @@ class _RegisterState extends State<Register> {
                     obscureText: true,
                     textEditingController: _password,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 140),
-                    child: Hero(
-                      tag: 'register',
-                      child: FlatButton(
-                        padding: EdgeInsets.only(top: 12, bottom: 12),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        shape: new RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: Theme.of(context).primaryColor),
-                            borderRadius: new BorderRadius.circular(4)),
-                        child: Text(
-                          'Register',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
+
                 ],
               ),
             )
