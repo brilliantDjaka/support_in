@@ -30,7 +30,11 @@ class DaftarKarya extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.only(top: 12, bottom: 12),
                     onPressed: () async {
-                      Navigator.of(context).pop();
+
+    Navigator.pushNamed(context, '/daftar-support',
+    arguments: {"idKreator": 'idKreator'});
+
+
                     },
                     shape: new RoundedRectangleBorder(
                         side: BorderSide(color: Theme
@@ -55,7 +59,7 @@ class DaftarKarya extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.only(top: 12, bottom: 12),
                     onPressed: () async {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed('/tukar-point');
                     },
                     shape: new RoundedRectangleBorder(
                         side: BorderSide(color: Theme
@@ -129,7 +133,7 @@ class DaftarKarya extends StatelessWidget {
                               child: CardKonten(
                                 imageUrl: e['imageUrl'],
                                 title: e['judulKarya'],
-                                rating: '0,4',
+                                rating: '10',
                               ),
                             ))
                             .toList());

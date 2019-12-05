@@ -12,7 +12,7 @@ class TukarPoint extends StatelessWidget {
         .of(context)
         .settings
         .arguments;
-    Future kreatorData = getKaryaListByKreatorId(args['idKreator']);
+    Future kreatorData = getKaryaListByKreatorId('');
     if (args == null) args = {};
     return Scaffold(
         appBar: AppBar(
@@ -36,7 +36,7 @@ class TukarPoint extends StatelessWidget {
                       imageUrl: data['picUrl'],
                       jumlahKarya: data['jumlahKarya'],
                       poin: data['point'],
-                      idKreator: args['idKreator'],
+                      idKreator: 'afewaf',
                     );
                   }
                   return Container(
@@ -51,6 +51,7 @@ class TukarPoint extends StatelessWidget {
                 },
               ),
               Container(
+                height: MediaQuery.of(context).size.height -190,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
@@ -58,13 +59,13 @@ class TukarPoint extends StatelessWidget {
                   color: Colors.white,
                 ),
                 child: FutureBuilder(
-                    future: getTukarPoinData(args['idKreator']),
+                    future: getTukarPoinData('awef'),
                     builder: (BuildContext context,
                         AsyncSnapshot<List> snapshot) {
                       if (snapshot.hasData) {
                         var data = snapshot.data.map((e) =>
                             RewardCard(
-                              kreatorId: args['idKreator'],
+                              kreatorId: 'afewaf',
                               title: e['title'],
                               poin: e['poin'],
                               imageUrl: e['picUrl'],

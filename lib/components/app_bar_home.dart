@@ -29,7 +29,7 @@ class AppBarHome extends StatelessWidget {
                           .textTheme
                           .title);
               },
-              future: getUserData(),
+
             )
           ],
         ),

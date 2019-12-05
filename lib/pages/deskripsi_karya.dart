@@ -20,6 +20,7 @@ class DeskripsiKarya extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Container(
+              height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
