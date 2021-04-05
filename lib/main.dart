@@ -13,23 +13,20 @@ import 'package:support_in/pages/register.dart';
 void main() async {
   bool loggedIn = false;
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  print(sharedPreferences.get('idUser'));
   if (sharedPreferences.get('idUser') != null) {
     loggedIn = true;
   }
   runApp(MaterialApp(
     theme: ThemeData(
-      primaryColor: Color(0xff2A4AC2),
+      primaryColor: Color(0xff2F80ED),
       accentColor: Color(0xffF2F2F2),
       backgroundColor: Color(0xffFFFFFF),
       textTheme: TextTheme(
           title: TextStyle(
-              color: Color(0xff2A4AC2),
+              color: Color(0xff2F80ED),
               fontWeight: FontWeight.bold,
               fontFamily: 'Nunito Sans',
-              fontSize: 24
-          ),
-
+              fontSize: 24),
           caption: TextStyle(color: Color(0xff7C7474))),
     ),
     title: 'support.in',

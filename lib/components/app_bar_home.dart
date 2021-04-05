@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './app_bar_raw.dart';
 import 'package:support_in/helper/async_func.dart';
 
@@ -28,7 +29,7 @@ class AppBarHome extends StatelessWidget {
                           .textTheme
                           .title);
               },
-              future: getUserData(),
+
             )
           ],
         ),
@@ -50,7 +51,14 @@ class AppBarHome extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: IconButton(
             icon: Icon(Icons.format_align_right),
-            onPressed: () => print('oyi'),
+            onPressed: () async {
+              SharedPreferences sharedPreference = await SharedPreferences
+                  .getInstance();
+              sharedPreference.clear();
+              Navigator.of(context).popUntil((route) =>
+              route.isFirst);
+              Navigator.of(context).pushReplacementNamed('/unlogin');
+            },
           ),
         )
       ],

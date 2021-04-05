@@ -1,11 +1,29 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import '../components/app_bar_daftar_kreator.dart';
-import '../components/daftar_kreator_list.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:support_in/components/penulis_card.dart';
+import 'package:support_in/components/search_bar_penulis.dart';
 import 'package:support_in/helper/async_func.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart' as spin;
-class DaftarKreator extends StatelessWidget {
+
+class DaftarKreator extends StatefulWidget {
+  @override
+  _DaftarKreatorState createState() => _DaftarKreatorState();
+}
+
+class _DaftarKreatorState extends State<DaftarKreator> {
+  bool isSearch;
+  String text;
+
+  @override
+  void initState() {
+    isSearch = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController search = TextEditingController();
     Map args = ModalRoute
         .of(context)
         .settings
@@ -14,49 +32,70 @@ class DaftarKreator extends StatelessWidget {
       args = {};
     }
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          AppBarDaftarKreator(args['kategori']),
-          FutureBuilder(
-            future: getKreatorByKategori(args['kategori']),
-            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-              if (snapshot.hasData) {
-                List<Widget> listKreator = snapshot.data.map((e) {
-                  return DaftarKreatorList(
-                    idKreator: e['idKreator'],
-                    nama: e['nama'],
-                    urlImage: e['urlImage'],
-                    skor: e['skor'],
-                    jumlahKarya: e['jumlahKarya'],
-                  );
-                }).toList();
-                return SliverList(
-                  delegate: SliverChildListDelegate(listKreator),
-                );
-              }
-              return SliverList(
-                delegate: SliverChildListDelegate([
-                  Container(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.25,
-                  ),
-                  Center(
-                    child: spin.SpinKitRing(
-                      color: Theme
-                          .of(context)
-                          .primaryColor,
-                      lineWidth: 4,
-                    ),
-                  )
-                ]),
-              );
-            },
+        appBar: AppBar(
+          elevation: 0,
+          title: Text(args['kategori']),
+          centerTitle: true,
+        ),
+        body: Container(
+          color: Theme
+              .of(context)
+              .primaryColor,
+          child: ListView(
+            children: <Widget>[
+              SearchBarPenulis(null, (String text) {
+                setState(() {
+                  this.text = text;
+                  isSearch = true;
+                });
+              }),
+              Container(
+                child: FutureBuilder(
+                    future: isSearch ? searchKreator(
+                        args['kategori'], this.text) : getKreatorByKategori(
+                        args['kategori']),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List> snapshot) {
+                      if (snapshot.hasData) {
+                        var data = snapshot.data.map((e) =>
+                            PenulisCard(
+                              idKreator: e['idKreator'],
+                              nama: e['nama'],
+                              urlImage: e['urlImage'],
+                              jumlahKarya: e['jumlahKarya'],
+                            )).toList();
+                        return Column(
+                          children: [...data, Container(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height,
+                          )
+                          ],
+                        );
+                      }
+                      return Container(
+                        height: (MediaQuery
+                            .of(context)
+                            .size
+                            .height - 190),
+                        child: SpinKitRing(
+                          lineWidth: 5,
+                          color: Theme
+                              .of(context)
+                              .primaryColor,
+                        ),
+                      );
+                    }),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16)),
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
-
-        ],
-      ),
-    );
+        ));
   }
 }

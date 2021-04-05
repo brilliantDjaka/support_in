@@ -1,9 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:support_in/components/bottom_nav_bar.dart';
-import 'package:support_in/components/button_support.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:support_in/components/detail_page_head.dart';
 import 'package:support_in/helper/async_func.dart';
-import '../components/daftar_karya_app_bar.dart';
-import '../components/deskripsi_karya_card.dart';
 
 class DeskripsiKarya extends StatelessWidget {
   @override
@@ -13,29 +12,80 @@ class DeskripsiKarya extends StatelessWidget {
         .settings
         .arguments;
     if (args == null) args = {};
-
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          DaftarKaryaAppBar(
-            kreatorData: getKaryaListByKreatorId(args['idKreator']),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              DeskripsiKaryaCard(
-                title: 'Origami Hati',
-                description: '“Janganlah kamu berpaling dan membuat kita menjadi dua orang asing yang tidak mengenal satu sama lain. Di bumi ini, ada banyak sekali orang yang bisa merebutmu”',
-                imageUrl: 'https://indonesiaebook.com/wp-content/uploads/2018/08/Origami-Hati-by-Boy-Candra.jpg',
-              ),
-              Container(
-                height: 60,
-              )
-            ]),
-          )
-        ],
+      body: Container(
+        color: Theme
+            .of(context)
+            .primaryColor,
+        child: ListView(
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16)),
+                  color: Colors.white,
+                ),
+                child: FutureBuilder(
+                    future: getSpecificKarya(
+                        args['idKreator'], args['idKarya']),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        var data = snapshot.data;
+                        return Column(
+                          children: <Widget>[
+                            DetailPageHead(
+                              judul: data['namaKarya'],
+                              rating: data['rating'],
+                              idKreator: args['idKreator'],
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                image: data['picUrl'] == null ||
+                                    data['picUrl'].isEmpty
+                                    ? null
+                                    : DecorationImage(
+                                    image: NetworkImage(data['picUrl']),
+                                    fit: BoxFit.cover),
+                                color: Color(0xffF0F0F0),
+                                shape: BoxShape.rectangle,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(24),
+                              child: Text(data['deskripsi']),
+                            )
+                          ],
+                        );
+                      }
+                      return Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height - 80,
+                        child: SpinKitRing(
+                          lineWidth: 5,
+                          color: Theme
+                              .of(context)
+                              .primaryColor,
+                        ),
+                      );
+                    })),
+          ],
+        ),
       ),
-      floatingActionButton: ButtonSupport(),
-      bottomNavigationBar: BottomNavBar(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Detail'),
+        elevation: 0,
+      ),
+
     );
   }
 }

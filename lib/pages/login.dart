@@ -13,6 +13,7 @@ class _LoginState extends State<Login> {
   final _fullName = TextEditingController();
   final _password = TextEditingController();
   final _email = TextEditingController();
+
   @override
   void dispose() {
     _fullName.dispose();
@@ -20,8 +21,58 @@ class _LoginState extends State<Login> {
     _password.dispose();
     super.dispose();
   }
+
   Widget build(BuildContext context) {
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldKey,
+      floatingActionButton: Hero(
+        tag: 'login',
+        child: Container(
+          width: MediaQuery
+              .of(context)
+              .size
+              .width - 32,
+          child: FlatButton(
+            padding: EdgeInsets.only(top: 12, bottom: 12),
+            onPressed: () async {
+              try {
+                var sharedPreference = await SharedPreferences
+                    .getInstance();
+                var data = await login(
+                    email: _email.text,
+                    password: _password.text
+                );
+
+                if (data['success']) {
+                  sharedPreference.setString('idUser', data['_id']);
+                  Navigator.of(context).popUntil((route) =>
+                  route.isFirst);
+                  Navigator.of(context).pushReplacementNamed('/');
+                }
+                else
+                  throw Error();
+              } catch (e) {
+                _scaffoldKey.currentState.showSnackBar(SnackBar(
+                  content: Text('error'),
+                ));
+              }
+            },
+            shape: new RoundedRectangleBorder(
+                side: BorderSide(color: Theme
+                    .of(context)
+                    .primaryColor),
+                borderRadius: new BorderRadius.circular(4)),
+            child: Text(
+              'Login',
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Theme
+                .of(context)
+                .primaryColor,
+          ),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(24, 48, 24, 27),
         child: ListView(
@@ -48,44 +99,7 @@ class _LoginState extends State<Login> {
                     obscureText: true,
                     textEditingController: _password,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 200
-                    ),
-                    child: Hero(
-                      tag: 'login',
-                      child: FlatButton(
-                        padding: EdgeInsets.only(top: 12, bottom: 12),
-                        onPressed: () async {
-                          try {
-                            var sharedPreference = await SharedPreferences
-                                .getInstance();
-                            var idUser = await getUserId();
-                            sharedPreference.setString('idUser', idUser);
-                            Navigator.of(context).popUntil((route) =>
-                            route.isFirst);
-                            Navigator.of(context).pushReplacementNamed('/');
-                          } catch (e) {
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text('error'),
-                            ));
-                          }
-                        },
-                        shape: new RoundedRectangleBorder(
-                            side: BorderSide(color: Theme
-                                .of(context)
-                                .primaryColor),
-                            borderRadius: new BorderRadius.circular(4)),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: Theme
-                            .of(context)
-                            .primaryColor,
-                      ),
-                    ),
-                  ),
+
                 ],
               ),
             )
